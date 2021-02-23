@@ -1,0 +1,36 @@
+name: 'markdown-image-uploader'
+author: 'rxrw'
+description: 'Automatically Transfer Your Markdown Local Image to Your Like CDNs'
+runs:
+  using: 'docker'
+  image: 'Dockerfile-action'
+  env:
+    ALIYUN_OSS_ACCESSKEY_ID: ${{ inputs.aliyun_oss_accesskey_id }}
+    ALIYUN_OSS_ACCESSKEY_SECRET: ${{ inputs.aliyun_oss_accesskey_secret }}
+    ALIYUN_OSS_ENDPOINT: ${{ inputs.aliyun_oss_endpoint }}
+    ALIYUN_OSS_BUCKET_NAME: ${{ inputs.aliyun_oss_bucket}}
+    ALIYUN_OSS_VISIT_URL: ${{ inputs.visit_url }}
+    CONTENT_PATH: ${{ inputs.content_path }}
+branding:
+  icon: 'circle'
+  color: 'purple'
+inputs:
+  content_path:
+    description: "Your Markdown's Folder Path"
+    required: false
+    default: 'content'
+  aliyun_oss_accesskey_id:
+    description: 'Access Key Id For Aliyun'
+    required: true
+  aliyun_oss_accesskey_secret:
+    description: 'Access Secret For Aliyun'
+    required: true
+  aliyun_oss_endpoint:
+    description: 'Endpoint For Aliyun OSS'
+    required: true
+  aliyun_oss_bucket:
+    description: 'Bucket Name For Aliyun OSS'
+    required: true
+  visit_url:
+    description: 'OSS Visit Url'
+    required: true
