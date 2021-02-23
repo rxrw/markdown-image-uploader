@@ -1,4 +1,4 @@
-FROM golang:1.15.7-alpine AS BUILDER
+FROM golang:1.15.6-alpine AS BUILDER
 
 WORKDIR /app
 
@@ -8,5 +8,10 @@ RUN go env -w GO111MODULE=on && \
     go env -w GOPROXY=https://goproxy.io,direct && \
     go build main.go
 
-COPY /app/main /bin/uploader
+FROM alpine:latest
+
+COPY --from=BUILDER /app/main /bin/uploader
+
 RUN chmod +x /bin/uploader
+
+CMD ["/bin/main"]
