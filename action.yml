@@ -3,7 +3,7 @@ author: 'rxrw'
 description: 'Automatically Transfer Your Markdown Local Image to Your Like CDNs'
 runs:
   using: 'docker'
-  image: 'Dockerfile-action'
+  image: 'actions/Dockerfile'
   env:
     ALIYUN_OSS_ACCESSKEY_ID: ${{ inputs.aliyun_oss_accesskey_id }}
     ALIYUN_OSS_ACCESSKEY_SECRET: ${{ inputs.aliyun_oss_accesskey_secret }}
