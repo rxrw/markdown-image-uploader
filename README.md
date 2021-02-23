@@ -1,22 +1,25 @@
-# MARKDOWN 图片自动上传图床工具
+# MARKDOWN Picture automatic upload image
 
-可以将 markdown 中的本地图片，远端图片自动修改为自定义图床。
+For Chinese Version: [Here](https://github.com/rxrw/markdown-image-uploader/README-zh.md)
 
-目前仅支持阿里云 oss
+You can automatically modify the local pictures and remote pictures in markdown to custom pictures.
 
-## 用法
+Currently only supports Alibaba Cloud OSS
 
-[下载最新版本](https://github.com/rxrw/markdown-image-uploader/releases/latest) 随意放
+## cli
+
+[Download the latest version](https://github.com/rxrw/markdown-image-uploader/releases/latest) Feel free to put
 
 ```bash
 ./uploader /usr/docs
 ```
 
-就 ok 了
+It's ok
 
-## 参数
+## Parameters
 
-通过环境变量设置
+Set through environment variables
+
 ALIYUN_OSS_ENDPOINT
 
 ALIYUN_OSS_ACCESSKEY_ID
@@ -26,3 +29,26 @@ ALIYUN_OSS_ACCESSKEY_SECRET
 ALIYUN_OSS_BUCKET_NAME
 
 ALIYUN_OSS_VISIT_URL
+
+## Github Actions
+
+This script supports automatic deployment of Github Actions
+
+### Usage
+
+Create the above variables in your warehouse Settings -> Secrets (of course, you can write directly like insensitive ones)
+
+Add in your actions.yml:
+
+  ```yml
+  -uses: rxrw/markdown-image-uploader-actions@v1.1
+    with:
+      content_path: "content"
+      aliyun_oss_accesskey_id: ${{ secrets.ALIYUN_OSS_ACCESSKEY_ID }}
+      aliyun_oss_accesskey_secret: ${{ secrets.ALIYUN_OSS_ACCESSKEY_SECRET }}
+      aliyun_oss_endpoint: ${{ secrets.ALIYUN_OSS_ENDPOINT }}
+      aliyun_oss_bucket: ${{ secrets.ALIYUN_OSS_BUCKET_NAME }}
+      visit_url: ${{ secrets.VISIT_URL }}
+  ```
+
+Continue to compile other content, the output of this script is the markdown you need
