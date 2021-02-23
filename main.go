@@ -22,6 +22,8 @@ var (
 func main() {
 	dir = getPath()
 
+	log.Printf("开始执行... \n 目录：%s", dir)
+
 	res := scanDirs(dir)
 
 	modifyFile(res)
@@ -84,10 +86,13 @@ func findImage(content string, fileName string) string {
 	}
 
 	if len(result) > 0 {
+		log.Printf("%s中需要替换的图片：%v", fileName, result)
 		for k, v := range result {
 			content = strings.ReplaceAll(content, k, v)
 		}
 		return content
+	} else {
+		log.Printf("%s中没有需要替换的图片。", fileName)
 	}
 
 	return ""
@@ -134,6 +139,7 @@ func replaceImage(originImage string, fileName string) string {
 		if strings.Contains(originImage, os.Getenv("ALIYUN_OSS_VISIT_URL")) {
 			return ""
 		}
+
 		fmt.Printf("GETTING FROM WEB: %s\n", originImage)
 		resp, err := http.Get(originImage)
 		if err != nil {
