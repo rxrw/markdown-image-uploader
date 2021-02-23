@@ -6,7 +6,7 @@
 
 ## 用法
 
-下载最新版本 随意放
+[下载最新版本](https://github.com/rxrw/markdown-image-uploader/releases/latest) 随意放
 
 ```bash
 ./uploader /usr/docs
