@@ -39,7 +39,7 @@ ALIYUN_OSS_VISIT_URL
 在你的 actions.yml 中添加：
 
   ```yml
-  - uses: rxrw/markdown-image-uploader-actions@v1
+  - uses: rxrw/markdown-image-uploader@v1.1.1
     with:
       content_path: "content"
       aliyun_oss_accesskey_id: ${{ secrets.ALIYUN_OSS_ACCESSKEY_ID }}
