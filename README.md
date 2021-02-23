@@ -1,6 +1,6 @@
 # MARKDOWN Picture automatic upload image
 
-For Chinese Version: [Here](https://github.com/rxrw/markdown-image-uploader/README-zh.md)
+For Chinese Version: [Here](https://github.com/rxrw/markdown-image-uploader/blob/master/README-zh.md)
 
 You can automatically modify the local pictures and remote pictures in markdown to custom pictures.
 
@@ -41,7 +41,7 @@ Create the above variables in your warehouse Settings -> Secrets (of course, you
 Add in your actions.yml:
 
   ```yml
-  -uses: rxrw/markdown-image-uploader-actions@v1.1
+  -uses: rxrw/markdown-image-uploader@v1.1.0
     with:
       content_path: "content"
       aliyun_oss_accesskey_id: ${{ secrets.ALIYUN_OSS_ACCESSKEY_ID }}
