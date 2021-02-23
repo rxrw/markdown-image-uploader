@@ -41,7 +41,7 @@ Create the above variables in your warehouse Settings -> Secrets (of course, you
 Add in your actions.yml:
 
   ```yml
-  -uses: rxrw/markdown-image-uploader@v1.1.1
+  -uses: rxrw/markdown-image-uploader@v1.1.2
     with:
       content_path: "content"
       aliyun_oss_accesskey_id: ${{ secrets.ALIYUN_OSS_ACCESSKEY_ID }}
