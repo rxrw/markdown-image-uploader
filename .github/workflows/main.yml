@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a release
-      - name: Go Release Binary
-        uses: ngs/go-release.action@v1.0.2
+      - name: GoReleaser Action
+        uses: goreleaser/goreleaser-action@v2.4.1
+
 
