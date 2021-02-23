@@ -14,6 +14,7 @@ import (
 	"strings"
 )
 
+//TODO: 本地文件路径还有问题
 var (
 	dir string
 )
@@ -100,6 +101,9 @@ func replaceImage(originImage string, fileName string) string {
 	remoteName := ""
 
 	remoteName = strings.TrimLeft(strings.Replace(fileName, path, "", 1), string(os.PathSeparator))
+	originPathArr := strings.Split(remoteName, string(os.PathSeparator))
+	originPath := strings.Join(originPathArr[:len(originPathArr)-1], string(os.PathSeparator))
+
 	remoteName = strings.Replace(remoteName, ".md", "", 1) + string(os.PathSeparator)
 
 	var remote string
@@ -108,7 +112,8 @@ func replaceImage(originImage string, fileName string) string {
 	if !regexp.MustCompile(`((http(s?))|(ftp))://.*`).MatchString(originImage) {
 
 		remoteName = remoteName + originImage
-		originImage = path + originImage
+
+		originImage = path + originPath + string(os.PathSeparator) + originImage
 
 		remote, _ = client.UploadFile(originImage, remoteName)
 	} else {
@@ -126,8 +131,15 @@ func replaceImage(originImage string, fileName string) string {
 		cipherStr := h.Sum(nil)
 		remoteName = remoteName + hex.EncodeToString(cipherStr) + "." + ext
 
-		resp, _ := http.Get(originImage)
-		fmt.Printf("GET FROM WEB: %s\n", originImage)
+		if strings.Contains(originImage, os.Getenv("ALIYUN_OSS_VISIT_URL")) {
+			return ""
+		}
+		fmt.Printf("GETTING FROM WEB: %s\n", originImage)
+		resp, err := http.Get(originImage)
+		if err != nil {
+			fmt.Println(err)
+			return ""
+		}
 		if resp.StatusCode != 200 {
 			fmt.Println(resp.StatusCode)
 			fmt.Println(resp.Request.URL.String())
