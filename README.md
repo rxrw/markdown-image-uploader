@@ -16,19 +16,19 @@ Currently only supports Alibaba Cloud OSS
 
 It's ok
 
-## Parameters
+## Environments
 
-Set through environment variables
+CLIENT_NAME aliyun/qiniu
 
-ALIYUN_OSS_ENDPOINT
+ENDPOINT endpoint value for aliyun, and zone for qiniu，such as Huabei/Beimei/Xinjiapo
 
-ALIYUN_OSS_ACCESSKEY_ID
+ACCESS_KEY ak
 
-ALIYUN_OSS_ACCESSKEY_SECRET
+ACCESS_SECRET sk
 
-ALIYUN_OSS_BUCKET_NAME
+BUCKET_NAME bucket name
 
-ALIYUN_OSS_VISIT_URL
+VISIT_URL the url of visit. **IMPORTANT!** example: `https://example.org`
 
 ## Github Actions
 
@@ -41,13 +41,14 @@ Create the above variables in your warehouse Settings -> Secrets (of course, you
 Add in your actions.yml:
 
   ```yml
-  -uses: rxrw/markdown-image-uploader@v1.1.2
+  -uses: rxrw/markdown-image-uploader@v2.0.1
     with:
       content_path: "content"
-      aliyun_oss_accesskey_id: ${{ secrets.ALIYUN_OSS_ACCESSKEY_ID }}
-      aliyun_oss_accesskey_secret: ${{ secrets.ALIYUN_OSS_ACCESSKEY_SECRET }}
-      aliyun_oss_endpoint: ${{ secrets.ALIYUN_OSS_ENDPOINT }}
-      aliyun_oss_bucket: ${{ secrets.ALIYUN_OSS_BUCKET_NAME }}
+      client_name: "qiniu"
+      access_key: ${{ secrets.ACCESS_KEY }}
+      access_secret: ${{ secrets.ACCESS_SECRET }}
+      endpoint: ${{ secrets.ENDPOINT }}
+      bucket_name: ${{ secrets.BUCKET_NAME }}
       visit_url: ${{ secrets.VISIT_URL }}
   ```
 
