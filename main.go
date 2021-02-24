@@ -14,7 +14,6 @@ import (
 	"strings"
 )
 
-//TODO: 本地文件路径还有问题
 var (
 	dir string
 )
@@ -91,9 +90,8 @@ func findImage(content string, fileName string) string {
 			content = strings.ReplaceAll(content, k, v)
 		}
 		return content
-	} else {
-		log.Printf("%s中没有需要替换的图片。", fileName)
 	}
+	log.Printf("%s中没有需要替换的图片。", fileName)
 
 	return ""
 }
@@ -136,7 +134,7 @@ func replaceImage(originImage string, fileName string) string {
 		cipherStr := h.Sum(nil)
 		remoteName = remoteName + hex.EncodeToString(cipherStr) + "." + ext
 
-		if strings.Contains(originImage, os.Getenv("ALIYUN_OSS_VISIT_URL")) {
+		if strings.Contains(originImage, os.Getenv("VISIT_URL")) {
 			return ""
 		}
 
