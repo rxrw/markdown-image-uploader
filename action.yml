@@ -1,4 +1,4 @@
-name: 'markdown-image-uploader'
+name: 'Markdown Image Uploader'
 author: 'rxrw'
 description: 'Automatically Transfer Your Markdown Local Image to Your Like CDNs'
 runs:
