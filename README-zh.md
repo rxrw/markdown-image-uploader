@@ -14,19 +14,19 @@
 
 就 ok 了
 
-## 参数
+## 环境变量
 
-通过环境变量设置
+CLIENT_NAME aliyun/qiniu
 
-ALIYUN_OSS_ENDPOINT
+ENDPOINT 阿里云为对应endpoint，七牛为地域名，如Huabei/Beimei/Xinjiapo
 
-ALIYUN_OSS_ACCESSKEY_ID
+ACCESS_KEY 对应的ak
 
-ALIYUN_OSS_ACCESSKEY_SECRET
+ACCESS_SECRET 对应的sk
 
-ALIYUN_OSS_BUCKET_NAME
+BUCKET_NAME 对应的 bucket 名
 
-ALIYUN_OSS_VISIT_URL
+VISIT_URL 一般为cdn 的 url。很重要！用于判断文件存在等。具体格式为完整的url。如： `https://example.org`
 
 ## Github Actions
 
@@ -39,13 +39,14 @@ ALIYUN_OSS_VISIT_URL
 在你的 actions.yml 中添加：
 
   ```yml
-  - uses: rxrw/markdown-image-uploader@v1.1.2
+  -uses: rxrw/markdown-image-uploader@v2.0.1
     with:
       content_path: "content"
-      aliyun_oss_accesskey_id: ${{ secrets.ALIYUN_OSS_ACCESSKEY_ID }}
-      aliyun_oss_accesskey_secret: ${{ secrets.ALIYUN_OSS_ACCESSKEY_SECRET }}
-      aliyun_oss_endpoint: ${{ secrets.ALIYUN_OSS_ENDPOINT }}
-      aliyun_oss_bucket: ${{ secrets.ALIYUN_OSS_BUCKET_NAME }}
+      client_name: "qiniu"
+      access_key: ${{ secrets.ACCESS_KEY }}
+      access_secret: ${{ secrets.ACCESS_SECRET }}
+      endpoint: ${{ secrets.ENDPOINT }}
+      bucket_name: ${{ secrets.BUCKET_NAME }}
       visit_url: ${{ secrets.VISIT_URL }}
   ```
 
