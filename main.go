@@ -85,13 +85,13 @@ func findImage(content string, fileName string) string {
 	}
 
 	if len(result) > 0 {
-		log.Printf("%s中需要替换的图片：%v", fileName, result)
+		log.Printf("%s中需要处理的图片：%v", fileName, result)
 		for k, v := range result {
 			content = strings.ReplaceAll(content, k, v)
 		}
 		return content
 	}
-	log.Printf("%s中没有需要替换的图片。", fileName)
+	log.Printf("%s中没有需要处理的图片。", fileName)
 
 	return ""
 }
