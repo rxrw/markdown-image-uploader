@@ -119,6 +119,9 @@ func replaceImage(originImage string, fileName string) string {
 		originImage = path + originPath + string(os.PathSeparator) + originImage
 
 		remote, _ = client.UploadFile(originImage, remoteName)
+
+		log.Printf("删除原有图片文件... <%s>", originImage)
+		os.Remove(originImage)
 	} else {
 
 		temp := strings.Split(originImage, "/")
