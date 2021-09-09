@@ -68,7 +68,7 @@ func findImage(content string, fileName string) string {
 
 	matched := pattern.FindAllStringSubmatch(content, -1)
 
-	result := make(map[string]string, 0)
+	result := make(map[string]string)
 
 	if len(matched) > 0 {
 		for _, match := range matched {
@@ -136,6 +136,11 @@ func replaceImage(originImage string, fileName string) string {
 
 		if strings.Contains(originImage, os.Getenv("VISIT_URL")) {
 			return ""
+		}
+
+		// 这种备案导致的cdn用不了，解决一下先
+		if os.Getenv("OLD_URL") != "" && strings.Contains(originImage, os.Getenv("OLD_URL")) {
+			return strings.Replace(originImage, os.Getenv("OLD_URL"), os.Getenv("VISIT_URL"), 1)
 		}
 
 		fmt.Printf("GETTING FROM WEB: %s\n", originImage)
