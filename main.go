@@ -145,6 +145,7 @@ func replaceImage(originImage string, fileName string) string {
 
 		// 这种备案导致的cdn用不了，解决一下先
 		if os.Getenv("OLD_URL") != "" && strings.Contains(originImage, os.Getenv("OLD_URL")) {
+			log.Printf("替换图片%s", originImage)
 			return strings.Replace(originImage, os.Getenv("OLD_URL"), os.Getenv("VISIT_URL"), 1)
 		}
 
