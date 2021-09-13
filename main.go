@@ -121,7 +121,7 @@ func replaceImage(originImage string, fileName string) string {
 		remote, _ = client.UploadFile(originImage, remoteName)
 
 		if os.Getenv("DELETE_ORIGIN_URL") != "" {
-			log.Printf("删除原有图片文件... <%s>", originImage)
+			log.Printf("删除原有图片文件 <%s>", originImage)
 			os.Remove(originImage)
 		}
 	} else {

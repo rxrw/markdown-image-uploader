@@ -28,6 +28,8 @@ func NewClient() Uploader {
 		client = NewAliyunClient()
 	case "qiniu":
 		client = NewQiniuClient()
+	case "minio":
+		client = NewMinioClient()
 	default:
 		client = NewAliyunClient()
 	}
