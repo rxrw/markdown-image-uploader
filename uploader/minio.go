@@ -40,7 +40,9 @@ func (a *MinioClient) UploadFile(filePath string, objectName string) (string, er
 		return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), objectName), nil
 	}
 
-	_, err := a.client.FPutObject(context.Background(), a.bucketName, objectName, filePath, minio.PutObjectOptions{})
+	_, err := a.client.FPutObject(context.Background(), a.bucketName, objectName, filePath, minio.PutObjectOptions{
+		ContentType: "image/png",
+	})
 
 	return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), objectName), err
 }
@@ -52,7 +54,9 @@ func (a *MinioClient) UploadString(content string, remoteFile string) (string, e
 		return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), remoteFile), nil
 	}
 
-	_, err := a.client.PutObject(context.Background(), a.bucketName, remoteFile, strings.NewReader(content), -1, minio.PutObjectOptions{})
+	_, err := a.client.PutObject(context.Background(), a.bucketName, remoteFile, strings.NewReader(content), -1, minio.PutObjectOptions{
+		ContentType: "image/png",
+	})
 
 	return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), remoteFile), err
 }
