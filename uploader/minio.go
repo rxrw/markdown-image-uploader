@@ -13,7 +13,6 @@ import (
 type MinioClient struct {
 	client     *minio.Client
 	bucketName string
-	region     string
 }
 
 //Connect connects
@@ -30,11 +29,6 @@ func (a *MinioClient) Connect() (err error) {
 	}
 
 	a.bucketName = os.Getenv("BUCKET_NAME")
-	a.region = os.Getenv("REGION")
-
-	err = a.client.MakeBucket(context.Background(), a.bucketName, minio.MakeBucketOptions{
-		Region: a.region,
-	})
 
 	return err
 }
@@ -58,15 +52,7 @@ func (a *MinioClient) UploadString(content string, remoteFile string) (string, e
 		return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), remoteFile), nil
 	}
 
-	err := a.client.MakeBucket(context.Background(), a.bucketName, minio.MakeBucketOptions{
-		Region: a.region,
-	})
-
-	if err != nil {
-		return "", err
-	}
-
-	_, err = a.client.PutObject(context.Background(), a.bucketName, remoteFile, strings.NewReader(content), -1, minio.PutObjectOptions{})
+	_, err := a.client.PutObject(context.Background(), a.bucketName, remoteFile, strings.NewReader(content), -1, minio.PutObjectOptions{})
 
 	return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), remoteFile), err
 }
