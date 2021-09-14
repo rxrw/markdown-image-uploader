@@ -25,6 +25,10 @@ func (a *AliyunClient) Connect() error {
 	// oss.UseCname(true)为开启CNAME。CNAME是指将自定义域名绑定到存储空间上。
 	client, err := oss.New(os.Getenv("ENDPOINT"), os.Getenv("ACCESS_KEY"), os.Getenv("ACCESS_SECRET"))
 
+	if err != nil {
+		return err
+	}
+
 	bucketName := os.Getenv("BUCKET_NAME")
 
 	a.bucket, err = client.Bucket(bucketName)

@@ -109,11 +109,7 @@ func (a *QiniuClient) FileExists(remoteFile string) bool {
 
 	fileInfo, _ := bucketManager.Stat(os.Getenv("BUCKET_NAME"), remoteFile)
 
-	if fileInfo.Fsize == 0 {
-		return false
-	}
-
-	return true
+	return fileInfo.Fsize != 0
 }
 
 //NewQiniuClient en

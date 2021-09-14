@@ -25,6 +25,10 @@ func (a *MinioClient) Connect() (err error) {
 		Creds: credentials.NewStaticV4(os.Getenv("ACCESS_KEY"), os.Getenv("ACCESS_SECRET"), ""),
 	})
 
+	if err != nil {
+		return err
+	}
+
 	a.bucketName = os.Getenv("BUCKET_NAME")
 	a.region = os.Getenv("REGION")
 
@@ -58,6 +62,10 @@ func (a *MinioClient) UploadString(content string, remoteFile string) (string, e
 		Region: a.region,
 	})
 
+	if err != nil {
+		return "", err
+	}
+
 	_, err = a.client.PutObject(context.Background(), a.bucketName, remoteFile, strings.NewReader(content), -1, minio.PutObjectOptions{})
 
 	return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), remoteFile), err
@@ -70,11 +78,7 @@ func (a *MinioClient) FileExists(remoteFile string) bool {
 
 	stat, _ := fileInfo.Stat()
 
-	if stat.Size == 0 {
-		return false
-	}
-
-	return true
+	return stat.Size != 0
 }
 
 //NewQiniuClient en
