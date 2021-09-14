@@ -28,6 +28,10 @@ func (a *MinioClient) Connect() (err error) {
 	a.bucketName = os.Getenv("BUCKET_NAME")
 	a.region = os.Getenv("REGION")
 
+	err = a.client.MakeBucket(context.Background(), a.bucketName, minio.MakeBucketOptions{
+		Region: a.region,
+	})
+
 	return err
 }
 
@@ -38,10 +42,7 @@ func (a *MinioClient) UploadFile(filePath string, objectName string) (string, er
 		return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), objectName), nil
 	}
 
-	err := a.client.MakeBucket(context.Background(), a.bucketName, minio.MakeBucketOptions{
-		Region: a.region,
-	})
-	_, err = a.client.FPutObject(context.Background(), a.bucketName, objectName, filePath, minio.PutObjectOptions{})
+	_, err := a.client.FPutObject(context.Background(), a.bucketName, objectName, filePath, minio.PutObjectOptions{})
 
 	return fmt.Sprintf("%s/%s", os.Getenv("VISIT_URL"), objectName), err
 }
