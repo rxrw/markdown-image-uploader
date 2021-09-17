@@ -90,8 +90,9 @@ func findImage(content string, fileName string) string {
 			content = strings.ReplaceAll(content, k, v)
 		}
 		return content
+	} else {
+		log.Printf("%s中图片均处理完成或没有需要处理的图片。", fileName)
 	}
-	log.Printf("%s中没有需要处理的图片。", fileName)
 
 	return ""
 }
@@ -120,9 +121,11 @@ func replaceImage(originImage string, fileName string) string {
 
 		_, err := client.UploadFile(originImage, remoteName)
 
-		if os.Getenv("DELETE_ORIGIN_URL") != "" && err != nil {
+		if os.Getenv("DELETE_ORIGIN_URL") != "" && err == nil {
 			log.Printf("删除原有图片文件 <%s>", originImage)
 			os.Remove(originImage)
+		} else {
+			log.Printf("文件上传失败，看：%v", err)
 		}
 	} else {
 
