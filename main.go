@@ -119,11 +119,15 @@ func replaceImage(originImage string, fileName string) string {
 
 		originImage = path + originPath + string(os.PathSeparator) + originImage
 
-		_, err := client.UploadFile(originImage, remoteName)
+		var err error
+
+		remote, err = client.UploadFile(originImage, remoteName)
 
 		if os.Getenv("DELETE_ORIGIN_URL") != "" && err == nil {
 			log.Printf("删除原有图片文件 <%s>", originImage)
 			os.Remove(originImage)
+
+			return remote
 		} else {
 			log.Printf("文件上传失败，看：%v", err)
 		}
